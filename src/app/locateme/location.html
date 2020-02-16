@@ -7,7 +7,7 @@
     </div>
     <span class="alert-msg">{{statusMsg}}</span>
     <div class="col-md-6 col-md-offset-4">
-      <button class="btn btn-s btn-primary btn-block btn-xm">
+      <button class="btn btn-s btn-primary btn-block btn-xm" [disabled]="clicked">
         Locate
       </button>
     </div>
@@ -15,14 +15,14 @@
 </form>
 <div class="col-md-8 col-md-offset-2 top-3">
   <div class="form-group">
-    <div *ngIf="!(locationData?.length > 0)">{{dataMsg}}</div>
+    <div class="no-data" *ngIf="!(locationData?.length > 0)">{{dataMsg}}</div>
     <div *ngIf="locationData?.length > 0">
       <div *ngFor="let latit of locationData" class="panel panel-primary">
         <div class="panel-heading">
           <span>RESULT:</span>
           <span>{{latit.address_components[0].long_name}}</span>
         </div>
-        <div class="panel-body">
+        <div class="panel-body panel-body-content">
           <div>
             <span>Latitude:</span>
             <span>{{latit.geometry.location.lat}}</span>

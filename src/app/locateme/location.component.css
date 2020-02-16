@@ -24,3 +24,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.no-data {
+  text-align: center;
+  color: #337ab7;
+}
+.panel-body-content {
+  font-family: monospace;
+  font-size: 12pt;
+}

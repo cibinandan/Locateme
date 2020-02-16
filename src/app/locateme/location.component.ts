@@ -17,6 +17,7 @@ export class locationcomponent implements OnDestroy {
   locationSubscribe: Subscription;
   locationForm: FormGroup;
   locationData: [];
+  clicked:boolean = false;
   statusMsg: string = "";
   dataMsg: string = "";
   color: string = "primary";
@@ -45,6 +46,7 @@ export class locationcomponent implements OnDestroy {
   }
   getGeoLocation() {
     this.isLoading = true;
+    this.clicked = true;
     if (this.locationForm.valid) {
       this.locationSubscribe = this.apisvc
         .getLocationData(this.locationForm.value["cityName"])
@@ -64,6 +66,7 @@ export class locationcomponent implements OnDestroy {
       this.statusMsg = "Please enter a valid City Name";
     }
     this.isLoading = false;
+    this.clicked = false;
   }
   ngOnDestroy(): void {
     this.locationSubscribe.unsubscribe();
