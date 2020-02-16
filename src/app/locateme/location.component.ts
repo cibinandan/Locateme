@@ -47,7 +47,8 @@ export class locationcomponent implements OnDestroy {
   getGeoLocation() {
     this.isLoading = true;
     this.clicked = true;
-    if (this.locationForm.valid) {
+    if (this.locationForm.dirty) {
+      this.statusMsg = "";
       this.locationSubscribe = this.apisvc
         .getLocationData(this.locationForm.value["cityName"])
         .subscribe(
@@ -55,18 +56,26 @@ export class locationcomponent implements OnDestroy {
             data.results.length > 0
               ? (this.locationData = data.results)
               : (this.dataMsg = "No Records Available");
+              this.isLoading = false;
+              this.clicked = false;
           },
           error => (
+            this.isLoading = false,
+            this.clicked = false,
             console.log(error),
             (this.statusMsg = "Error occured while processing.Check console.")
+            
           )
         );
     } else {
       this.locationData = [];
+      this.isLoading = false;
+      this.clicked = false;
       this.statusMsg = "Please enter a valid City Name";
+      
     }
-    this.isLoading = false;
-    this.clicked = false;
+
+    
   }
   ngOnDestroy(): void {
     this.locationSubscribe.unsubscribe();
