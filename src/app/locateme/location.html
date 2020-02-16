@@ -1,0 +1,42 @@
+<form [formGroup]="locationForm" (ngSubmit)="getGeoLocation()">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="form-group" [ngClass]="{'has-error' : locationForm.get('cityName').errors}">
+      <label for="cityName">City Name</label>
+      <input class="form-control" type="search" id="cityName" formControlName="cityName" (focus)="focusFunction()"
+        (keyup)="uiReset()" placeholder="enter city name" />    
+    </div>
+    <span class="alert-msg">{{statusMsg}}</span>
+    <div class="col-md-6 col-md-offset-4">
+      <button class="btn btn-s btn-primary btn-block btn-xm">
+        Locate
+      </button>
+    </div>
+  </div>
+</form>
+<div class="col-md-8 col-md-offset-2 top-3">
+    <div class="form-group">
+      <div *ngIf="!(locationData?.length > 0)">{{dataMsg}}</div>
+      <div *ngIf="locationData?.length > 0">
+        <div *ngFor="let latit of locationData" class="panel panel-primary">
+          <div class="panel-heading">
+            <span>RESULT:</span>
+            <span>{{latit.address_components[0].long_name}}</span>
+          </div>
+          <div class="panel-body">
+            <div>
+              <span>Latitude:</span>
+              <span>{{latit.geometry.location.lat}}</span>
+            </div>
+            <div>
+              <span>Longitude:</span>
+              <span>{{latit.geometry.location.lng}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoading"class="overlay">
+    <mat-progress-spinner class="spinner" [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-spinner>
+  </div>

@@ -5,6 +5,9 @@
 export const environment = {
   production: false
 };
+export const APIs = {
+  geocode: "api/geocode/json?sensor=false&address="
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

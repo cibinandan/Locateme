@@ -1,0 +1,10 @@
+.header-tab {
+  font-size: 35pt;
+  background: #dcdcdc;
+}
+.component-body {
+  border: 1px;
+  border-style: solid;
+  border-color: #e4e4e4;
+  padding: 20px;
+}
